@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SaveTheDish</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="name">Name</string>
+    <string name="add_dish">Add Dish</string>
+    <string name="cancel">Cancel</string>
+    <string name="empty_list_text">Too bad, we couldn\'t find any delicious dishes. \nClick the \'+\' button to get started!</string>
+</resources>
