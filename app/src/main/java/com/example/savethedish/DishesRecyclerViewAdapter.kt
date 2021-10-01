@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.dish_item.view.*
 
-class DishesRecyclerViewAdapter(private val data: MutableList<String>) : RecyclerView.Adapter<DishesRecyclerViewAdapter.DishesViewHolder>() {
+class DishesRecyclerViewAdapter(private val data: MutableList<String>) :
+    RecyclerView.Adapter<DishesRecyclerViewAdapter.DishesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishesViewHolder {
         return DishesViewHolder(
@@ -14,8 +15,6 @@ class DishesRecyclerViewAdapter(private val data: MutableList<String>) : Recycle
                 .inflate(R.layout.dish_item, parent, false)
         )
     }
-
-    override fun getItemCount() = data.size
 
     override fun onBindViewHolder(holder: DishesViewHolder, position: Int) =
         holder.bind(data[position])
@@ -26,10 +25,12 @@ class DishesRecyclerViewAdapter(private val data: MutableList<String>) : Recycle
             delete_button.setOnClickListener {
                 data.removeAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
-                if(data.size==0) {
+                if (data.size == 0) {
                     (context as MainActivity).viewBinding.noDishesLayout.visibility = View.VISIBLE
                 }
             }
         }
     }
+
+    override fun getItemCount() = data.size
 }
