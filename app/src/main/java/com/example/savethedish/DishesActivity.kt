@@ -34,9 +34,7 @@ class DishesActivity : AppCompatActivity() {
 
     private fun setupViews() {
         setupDialog()
-
         list = dishesSQLiteHelper.getDishesFromDatabase()
-
         setupRecycler()
         if (list.isNotEmpty()) viewBinding.noDishesLayout.visibility = View.GONE
         viewBinding.addButton.setOnClickListener { addButtonClicked() }
@@ -77,7 +75,7 @@ class DishesActivity : AppCompatActivity() {
     }
 
     private fun addDishToList() {
-        list.add(Dish(list.size-1,dialogViewBinding.dishNameEditText.text.toString()))
+        list.add(Dish(list.size,dialogViewBinding.dishNameEditText.text.toString()))
         if (list.isNotEmpty()) viewBinding.noDishesLayout.visibility = View.GONE
         viewBinding.recyclerView.adapter?.notifyItemInserted(list.size - 1)
         dialog.dismiss()

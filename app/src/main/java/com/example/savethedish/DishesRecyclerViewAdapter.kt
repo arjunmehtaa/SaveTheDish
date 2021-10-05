@@ -25,6 +25,7 @@ class DishesRecyclerViewAdapter(private val data: MutableList<Dish>) :
             dish_name.text = dish.name
             delete_button.setOnClickListener {
                 data.removeAt(adapterPosition)
+                for(i in adapterPosition until data.size) data[i].id--
                 notifyItemRemoved(adapterPosition)
                 if (data.size == 0) {
                     (context as DishesActivity).viewBinding.noDishesLayout.visibility = View.VISIBLE
