@@ -13,28 +13,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.savethedish.databinding.ActivityMainBinding
 import com.example.savethedish.databinding.CustomDialogBinding
+import com.example.savethedish.model.Dish
 
 class DishesActivity : AppCompatActivity() {
 
     lateinit var viewBinding: ActivityMainBinding
     private lateinit var dialogViewBinding: CustomDialogBinding
-    private var list: MutableList<String> = mutableListOf()
+    private var list : MutableList<Dish> = mutableListOf()
     private lateinit var dialog: Dialog
-    private lateinit var viewModel: DishesSharedPrefsHelper
+    private lateinit var dishesSQLiteHelper: DishesSQLiteHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         dialogViewBinding = CustomDialogBinding.inflate(layoutInflater)
-        viewModel = DishesSharedPrefsHelper(application, list)
+        dishesSQLiteHelper = DishesSQLiteHelper(this,null)
         setupViews()
     }
 
     private fun setupViews() {
         setupDialog()
+
+        list = dishesSQLiteHelper.getDishesFromDatabase()
+
         setupRecycler()
-        list = viewModel.setupListFromSharedPrefs()
         if (list.isNotEmpty()) viewBinding.noDishesLayout.visibility = View.GONE
         viewBinding.addButton.setOnClickListener { addButtonClicked() }
         with(dialogViewBinding) {
@@ -74,7 +77,7 @@ class DishesActivity : AppCompatActivity() {
     }
 
     private fun addDishToList() {
-        list.add(dialogViewBinding.dishNameEditText.text.toString())
+        list.add(Dish(list.size-1,dialogViewBinding.dishNameEditText.text.toString()))
         if (list.isNotEmpty()) viewBinding.noDishesLayout.visibility = View.GONE
         viewBinding.recyclerView.adapter?.notifyItemInserted(list.size - 1)
         dialog.dismiss()
@@ -82,6 +85,6 @@ class DishesActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.saveDataToSharedPrefs()
+        dishesSQLiteHelper.addDishesToDatabase(list)
     }
 }
