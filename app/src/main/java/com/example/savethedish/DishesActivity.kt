@@ -14,20 +14,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.savethedish.databinding.ActivityMainBinding
 import com.example.savethedish.databinding.CustomDialogBinding
 
-class MainActivity : AppCompatActivity() {
+class DishesActivity : AppCompatActivity() {
 
     lateinit var viewBinding: ActivityMainBinding
     private lateinit var dialogViewBinding: CustomDialogBinding
     private var list: MutableList<String> = mutableListOf()
     private lateinit var dialog: Dialog
-    private lateinit var viewModel: DishesViewModel
+    private lateinit var viewModel: DishesSharedPrefsHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
         dialogViewBinding = CustomDialogBinding.inflate(layoutInflater)
-        viewModel = DishesViewModel(application, list)
+        viewModel = DishesSharedPrefsHelper(application, list)
         setupViews()
     }
 

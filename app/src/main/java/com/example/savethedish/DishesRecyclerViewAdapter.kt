@@ -26,7 +26,7 @@ class DishesRecyclerViewAdapter(private val data: MutableList<String>) :
                 data.removeAt(adapterPosition)
                 notifyItemRemoved(adapterPosition)
                 if (data.size == 0) {
-                    (context as MainActivity).viewBinding.noDishesLayout.visibility = View.VISIBLE
+                    (context as DishesActivity).viewBinding.noDishesLayout.visibility = View.VISIBLE
                 }
             }
         }

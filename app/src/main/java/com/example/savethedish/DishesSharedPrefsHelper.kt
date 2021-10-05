@@ -3,12 +3,10 @@ package com.example.savethedish
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.lifecycle.AndroidViewModel
 
-class DishesViewModel(application: Application, private val list: MutableList<String>) :
-    AndroidViewModel(application) {
+class DishesSharedPrefsHelper(application: Application, private val list: MutableList<String>) {
 
-    private val sharedPref: SharedPreferences = getApplication<Application>().getSharedPreferences(
+    private val sharedPref: SharedPreferences = application.getSharedPreferences(
         DISH_LIST_KEY, Context.MODE_PRIVATE
     )
 
