@@ -11,7 +11,7 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(context.getString(R.string.sql_command_create_table, TABLE_NAME, ID, DISH_NAME))
+        db.execSQL(context.getString(R.string.sql_command_create_table, TABLE_NAME, DISH_NAME))
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -19,15 +19,11 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         onCreate(db)
     }
 
-    fun addDishesToDatabase(dishList: MutableList<Dish>) {
+    fun addDishToDatabase(dish : Dish) {
         val db = this.writableDatabase
-        db.execSQL(context.getString(R.string.sql_command_clear_table, TABLE_NAME))
-        dishList.forEach{
-            val values = ContentValues()
-            values.put(ID, it.id)
-            values.put(DISH_NAME, it.name)
-            db.insert(TABLE_NAME, null, values)
-        }
+        val values = ContentValues()
+        values.put(DISH_NAME, dish.name)
+        db.insert(TABLE_NAME, null, values)
         db.close()
     }
 
@@ -37,7 +33,7 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         val cursor = db.rawQuery(context.getString(R.string.sql_command_select, TABLE_NAME), null)
         cursor.moveToFirst()
         while(!cursor.isAfterLast){
-            list.add(Dish(list.size,cursor.getString(cursor.getColumnIndex(DISH_NAME))))
+            list.add(Dish(cursor.getString(cursor.getColumnIndex(DISH_NAME))))
             cursor.moveToNext()
         }
         cursor.close()
@@ -45,8 +41,13 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         return list
     }
 
+    fun deleteDishFromDatabase(dish : Dish){
+        val db = this.writableDatabase
+        db.delete(TABLE_NAME, "$DISH_NAME =?", arrayListOf<String>(dish.name).toTypedArray())
+        db.close()
+    }
+
     companion object {
-        const val ID = "ID"
         const val DATABASE_NAME = "DishesDatabase.db"
         const val DATABASE_VERSION = 1
         const val TABLE_NAME = "dishesList"

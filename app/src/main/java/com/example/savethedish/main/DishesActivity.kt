@@ -78,14 +78,11 @@ class DishesActivity : AppCompatActivity() {
     }
 
     private fun addDishToList() {
-        list.add(Dish(list.size,dialogViewBinding.dishNameEditText.text.toString()))
+        dishesSQLiteHelper.addDishToDatabase(Dish(dialogViewBinding.dishNameEditText.text.toString()))
+        list = dishesSQLiteHelper.getDishesFromDatabase()
+        setupRecycler()
         if (list.isNotEmpty()) viewBinding.noDishesLayout.visibility = View.GONE
         viewBinding.recyclerView.adapter?.notifyItemInserted(list.size - 1)
         dialog.dismiss()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        dishesSQLiteHelper.addDishesToDatabase(list)
     }
 }
