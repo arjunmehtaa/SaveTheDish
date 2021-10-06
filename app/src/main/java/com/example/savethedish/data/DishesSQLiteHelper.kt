@@ -1,40 +1,40 @@
-package com.example.savethedish
+package com.example.savethedish.data
 
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import com.example.savethedish.R
 import com.example.savethedish.model.Dish
 
-class DishesSQLiteHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
+class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.CursorFactory?) :
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("create table $TABLE_NAME ($ID INTEGER, $DISH_NAME TEXT)")
+        db.execSQL(context.getString(R.string.sql_command_create_table, TABLE_NAME, ID, DISH_NAME))
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("drop table if exists $TABLE_NAME")
+        db.execSQL(context.getString(R.string.sql_command_drop_table, TABLE_NAME))
         onCreate(db)
     }
 
     fun addDishesToDatabase(dishList: MutableList<Dish>) {
         val db = this.writableDatabase
-        db.execSQL("delete from $TABLE_NAME")
+        db.execSQL(context.getString(R.string.sql_command_clear_table, TABLE_NAME))
         dishList.forEach{
             val values = ContentValues()
             values.put(ID, it.id)
             values.put(DISH_NAME, it.name)
-            val db = this.writableDatabase
             db.insert(TABLE_NAME, null, values)
-            db.close()
         }
+        db.close()
     }
 
     fun getDishesFromDatabase() : MutableList<Dish>{
         val list : MutableList<Dish> = mutableListOf()
         val db = this.readableDatabase
-        val cursor = db.rawQuery("select * from $TABLE_NAME", null)
+        val cursor = db.rawQuery(context.getString(R.string.sql_command_select, TABLE_NAME), null)
         cursor.moveToFirst()
         while(!cursor.isAfterLast){
             list.add(Dish(list.size,cursor.getString(cursor.getColumnIndex(DISH_NAME))))

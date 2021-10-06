@@ -1,9 +1,11 @@
-package com.example.savethedish
+package com.example.savethedish.ui
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.savethedish.main.DishesActivity
+import com.example.savethedish.R
 import com.example.savethedish.model.Dish
 import kotlinx.android.synthetic.main.dish_item.view.*
 

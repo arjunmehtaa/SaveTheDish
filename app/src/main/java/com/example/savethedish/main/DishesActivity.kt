@@ -1,4 +1,4 @@
-package com.example.savethedish
+package com.example.savethedish.main
 
 import android.app.Dialog
 import android.graphics.Color
@@ -11,9 +11,12 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.savethedish.data.DishesSQLiteHelper
 import com.example.savethedish.databinding.ActivityMainBinding
 import com.example.savethedish.databinding.CustomDialogBinding
 import com.example.savethedish.model.Dish
+import com.example.savethedish.ui.DishNameTextWatcher
+import com.example.savethedish.ui.DishesRecyclerViewAdapter
 
 class DishesActivity : AppCompatActivity() {
 

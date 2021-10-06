@@ -1,4 +1,4 @@
-package com.example.savethedish
+package com.example.savethedish.ui
 
 import android.text.Editable
 import android.text.TextWatcher
