@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#FEFEFE</color>
     <color name="colorAccent">#666666</color>
     <color name="title_color">#333333</color>
+    <color name="lighter_text_color">#999999</color>
     <color name="button_enabled_color">#3700B3</color>
     <color name="button_disabled_color">#666666</color>
 </resources>

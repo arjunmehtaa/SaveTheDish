@@ -4,9 +4,17 @@
     <string name="name">Name</string>
     <string name="add_dish">Add Dish</string>
     <string name="cancel">Cancel</string>
-    <string name="empty_list_text">Too bad, we couldn\'t find any delicious dishes. \nClick the \'+\' button to get started!</string>
-    <string name="sql_command_create_table">create table %s (%s TEXT)</string>
+    <string name="empty_list_text">Too bad, we could not find any delicious dishes. \nClick the \'+\' button to get started!</string>
+    <string name="sql_command_create_table">create table %s (%s TEXT, %s TEXT)</string>
     <string name="sql_command_drop_table">drop table if exists %s</string>
     <string name="sql_command_select">select * from %s</string>
     <string name="sql_command_clear_table">delete from %s</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="see_list">SEE LIST</string>
+    <string name="dishes_you_can_cook">Dishes you can cook</string>
+    <string name="list_the_ingredients">List the ingredients you have to get started!</string>
+    <string name="could_not_find_to_cook">Sorry, we could not find any dishes to cook. </string>
+    <string name="all_dishes">All dishes</string>
+    <string name="dishes_i_can_cook">Show dishes I can cook</string>
+    <string name="ingredients_you_have">What ingredients do you have?</string>
 </resources>

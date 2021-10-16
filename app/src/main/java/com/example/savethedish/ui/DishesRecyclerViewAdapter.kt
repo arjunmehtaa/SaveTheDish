@@ -10,7 +10,10 @@ import com.example.savethedish.main.DishesActivity
 import com.example.savethedish.model.Dish
 import kotlinx.android.synthetic.main.dish_item.view.*
 
-class DishesRecyclerViewAdapter(private var data: MutableList<Dish>) :
+class DishesRecyclerViewAdapter(
+    private var data: MutableList<Dish>,
+    private val showExtraOptions: Boolean
+) :
     RecyclerView.Adapter<DishesRecyclerViewAdapter.DishesViewHolder>() {
 
     private lateinit var dishesSQLiteHelper: DishesSQLiteHelper
@@ -28,13 +31,25 @@ class DishesRecyclerViewAdapter(private var data: MutableList<Dish>) :
 
     inner class DishesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(dish: Dish) = with(itemView) {
+            if (showExtraOptions) delete_button.visibility = View.VISIBLE
+            else delete_button.visibility = View.INVISIBLE
             dish_name.text = dish.name
+            val ingString = StringBuilder("")
+            for (i in dish.ingredients.indices) {
+                ingString.append(dish.ingredients[i])
+                if (i != dish.ingredients.size - 1) {
+                    ingString.append(", ")
+                }
+            }
+            dish_ing.text = ingString
             delete_button.setOnClickListener {
                 dishesSQLiteHelper.deleteDishFromDatabase(dish)
                 data = dishesSQLiteHelper.getDishesFromDatabase()
                 notifyItemRemoved(adapterPosition)
-                if (data.size == 0) (context as DishesActivity).viewBinding.noDishesLayout.visibility =
-                    View.VISIBLE
+                if (data.size == 0) {
+                    (context as DishesActivity).viewBinding.noDishesLayout.visibility = View.VISIBLE
+                    (context as DishesActivity).viewBinding.nestedScrollView.visibility = View.GONE
+                }
             }
         }
     }

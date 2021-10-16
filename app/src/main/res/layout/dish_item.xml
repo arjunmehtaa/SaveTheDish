@@ -35,7 +35,16 @@
             android:layout_marginEnd="16dp"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/delete_icon"/>
+            android:src="@drawable/delete_icon" />
+
+        <TextView
+            android:id="@+id/dish_ing"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dish_name"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 

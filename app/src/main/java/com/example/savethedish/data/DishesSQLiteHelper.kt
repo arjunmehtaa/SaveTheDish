@@ -11,7 +11,7 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
     SQLiteOpenHelper(context, DATABASE_NAME, factory, DATABASE_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(context.getString(R.string.sql_command_create_table, TABLE_NAME, DISH_NAME))
+        db.execSQL(context.getString(R.string.sql_command_create_table, TABLE_NAME, DISH_NAME, DISH_ING))
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -23,6 +23,14 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(DISH_NAME, dish.name)
+        val ingString = StringBuilder("")
+        for (i in dish.ingredients.indices) {
+            ingString.append(dish.ingredients[i])
+            if (i != dish.ingredients.size - 1) {
+                ingString.append(", ")
+            }
+        }
+        values.put(DISH_ING, ingString.toString())
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
@@ -32,8 +40,10 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         val db = this.readableDatabase
         val cursor = db.rawQuery(context.getString(R.string.sql_command_select, TABLE_NAME), null)
         cursor.moveToFirst()
-        while(!cursor.isAfterLast){
-            list.add(Dish(cursor.getString(cursor.getColumnIndex(DISH_NAME))))
+        while(!cursor.isAfterLast) {
+            val dishName = cursor.getString(cursor.getColumnIndex(DISH_NAME))
+            val dishIng = cursor.getString(cursor.getColumnIndex(DISH_ING)).split(", ")
+            list.add(Dish(dishName, dishIng))
             cursor.moveToNext()
         }
         cursor.close()
@@ -52,5 +62,6 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         const val DATABASE_VERSION = 1
         const val TABLE_NAME = "dishesList"
         const val DISH_NAME = "DISH_NAME"
+        const val DISH_ING = "DISH_ING"
     }
 }

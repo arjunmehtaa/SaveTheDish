@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".AddDishFragment">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -23,12 +21,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/name"
+                android:importantForAutofill="no"
                 android:inputType="text"
-                android:textStyle="bold"
-                android:textSize="36sp"/>
+                android:textSize="36sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/dish_ingredients_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="16dp"
+                android:hint="@string/ingredients"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:textSize="24sp" />
 
             <Button
                 android:id="@+id/add_dish_button"
@@ -36,12 +46,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@drawable/button_selector"
+                android:enabled="false"
                 android:text="@string/add_dish"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:enabled="false"
-                android:background="@drawable/rounded_background"
-                android:backgroundTint="@drawable/button_selector"
                 android:textSize="16sp" />
 
             <Button
@@ -50,12 +60,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginBottom="16dp"
+                android:background="@drawable/rounded_background"
+                android:backgroundTint="@drawable/button_selector"
+                android:enabled="true"
                 android:text="@string/cancel"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
-                android:enabled="true"
-                android:background="@drawable/rounded_background"
-                android:backgroundTint="@drawable/button_selector"
                 android:textSize="16sp" />
 
         </LinearLayout>
