@@ -26,7 +26,8 @@
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="Fried Chicken"/>
+            android:inputType="textCapWords"
+            tools:text="fried chicken" />
 
         <ImageView
             android:id="@+id/delete_button"
@@ -38,10 +39,11 @@
             android:src="@drawable/delete_icon" />
 
         <TextView
-            android:id="@+id/dish_ing"
+            android:id="@+id/dish_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dish_name"
+            android:layout_toStartOf="@id/delete_button"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
             android:textSize="14sp" />

@@ -10,7 +10,7 @@
     tools:context=".main.DishesActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/save_the_dish_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -19,7 +19,7 @@
         android:minHeight="?android:attr/actionBarSize">
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/save_the_dish_toolbar_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -34,7 +34,7 @@
         android:id="@+id/nested_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
+        android:layout_below="@id/save_the_dish_toolbar"
         android:overScrollMode="never">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,10 +62,10 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/toolbar">
+                    app:layout_constraintTop_toBottomOf="@id/save_the_dish_toolbar">
 
                     <EditText
-                        android:id="@+id/my_ing"
+                        android:id="@+id/my_ingredients_edittext"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -76,7 +76,7 @@
                         android:textSize="20sp" />
 
                     <Button
-                        android:id="@+id/my_button"
+                        android:id="@+id/show_dishes_to_cook_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
@@ -94,7 +94,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/dishes_you_can_cook"
+                android:id="@+id/dishes_you_can_cook_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -117,7 +117,7 @@
                 app:cardElevation="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dishes_you_can_cook">
+                app:layout_constraintTop_toBottomOf="@id/dishes_you_can_cook_textview">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/toolbar">
+                    app:layout_constraintTop_toBottomOf="@id/save_the_dish_toolbar">
 
                     <TextView
                         android:id="@+id/no_dishes_to_cook_textview"
@@ -141,7 +141,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_one"
+                android:id="@+id/dishes_to_cook_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -152,7 +152,7 @@
                 app:layout_constraintTop_toBottomOf="@id/no_dishes_to_cook_card" />
 
             <TextView
-                android:id="@+id/all_dishes"
+                android:id="@+id/all_dishes_textview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -163,10 +163,10 @@
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view_one" />
+                app:layout_constraintTop_toBottomOf="@id/dishes_to_cook_recycler_view" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_two"
+                android:id="@+id/all_dishes_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
@@ -175,7 +175,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/all_dishes" />
+                app:layout_constraintTop_toBottomOf="@id/all_dishes_textview" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -203,7 +203,7 @@
             android:src="@drawable/food_icon" />
 
         <TextView
-            android:id="@+id/no_dish_tv"
+            android:id="@+id/no_dish_textview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

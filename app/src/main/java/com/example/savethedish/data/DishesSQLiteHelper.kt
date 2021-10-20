@@ -23,14 +23,14 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(DISH_NAME, dish.name)
-        val ingString = StringBuilder("")
+        val ingredientsString = StringBuilder("")
         for (i in dish.ingredients.indices) {
-            ingString.append(dish.ingredients[i])
+            ingredientsString.append(dish.ingredients[i])
             if (i != dish.ingredients.size - 1) {
-                ingString.append(", ")
+                ingredientsString.append(",")
             }
         }
-        values.put(DISH_ING, ingString.toString())
+        values.put(DISH_ING, ingredientsString.toString())
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
@@ -42,8 +42,10 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         cursor.moveToFirst()
         while(!cursor.isAfterLast) {
             val dishName = cursor.getString(cursor.getColumnIndex(DISH_NAME))
-            val dishIng = cursor.getString(cursor.getColumnIndex(DISH_ING)).split(", ")
-            list.add(Dish(dishName, dishIng))
+            val ingredientsList = cursor.getString(cursor.getColumnIndex(DISH_ING)).split(",")
+            val finalIngredientsList: MutableList<String> = mutableListOf()
+            ingredientsList.forEach { finalIngredientsList.add(it.trim()) }
+            list.add(Dish(dishName, finalIngredientsList))
             cursor.moveToNext()
         }
         cursor.close()

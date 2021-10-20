@@ -34,14 +34,14 @@ class DishesRecyclerViewAdapter(
             if (showExtraOptions) delete_button.visibility = View.VISIBLE
             else delete_button.visibility = View.INVISIBLE
             dish_name.text = dish.name
-            val ingString = StringBuilder("")
+            val ingredientsString = StringBuilder("")
             for (i in dish.ingredients.indices) {
-                ingString.append(dish.ingredients[i])
+                ingredientsString.append(dish.ingredients[i])
                 if (i != dish.ingredients.size - 1) {
-                    ingString.append(", ")
+                    ingredientsString.append(", ")
                 }
             }
-            dish_ing.text = ingString
+            dish_ingredients.text = ingredientsString
             delete_button.setOnClickListener {
                 dishesSQLiteHelper.deleteDishFromDatabase(dish)
                 data = dishesSQLiteHelper.getDishesFromDatabase()

@@ -20,6 +20,7 @@ import com.example.savethedish.databinding.CustomDialogBinding
 import com.example.savethedish.model.Dish
 import com.example.savethedish.ui.DishNameTextWatcher
 import com.example.savethedish.ui.DishesRecyclerViewAdapter
+import java.util.*
 
 class DishesActivity : AppCompatActivity() {
 
@@ -37,43 +38,23 @@ class DishesActivity : AppCompatActivity() {
         dialogViewBinding = CustomDialogBinding.inflate(layoutInflater)
         dishesSQLiteHelper = DishesSQLiteHelper(this, null)
         setupViews()
-        viewBinding.myButton.setOnClickListener {
-            val ing = viewBinding.myIng.text.toString()
-            val ingredientsList: List<String> = ing.split(", ")
-            youCanMakeList.clear()
-            list.forEach {
-                if (ingredientsList.containsAll(it.ingredients)) {
-                    youCanMakeList.add(it)
-                }
-            }
-            viewBinding.myIng.clearFocus()
-            viewBinding.myIng.hideSoftInput()
-            viewBinding.recyclerViewOne.adapter?.notifyDataSetChanged()
-            if (youCanMakeList.isEmpty()) {
-                viewBinding.noDishesToCookCard.visibility = View.VISIBLE
-                if (viewBinding.myIng.text.toString() == "") {
-                    viewBinding.noDishesToCookTextview.text =
-                        resources.getString(R.string.list_the_ingredients)
-                } else viewBinding.noDishesToCookTextview.text =
-                    resources.getString(R.string.could_not_find_to_cook)
-            } else {
-                viewBinding.noDishesToCookCard.visibility = View.GONE
-            }
-        }
     }
 
     private fun setupViews() {
         setupDialog()
         list = dishesSQLiteHelper.getDishesFromDatabase()
         setupRecycler()
-        if (list.isNotEmpty()) {
-            viewBinding.noDishesLayout.visibility = View.GONE
-            viewBinding.nestedScrollView.visibility = View.VISIBLE
-        } else {
-            viewBinding.noDishesLayout.visibility = View.VISIBLE
-            viewBinding.nestedScrollView.visibility = View.GONE
+        with(viewBinding) {
+            if (list.isNotEmpty()) {
+                noDishesLayout.visibility = View.GONE
+                nestedScrollView.visibility = View.VISIBLE
+            } else {
+                noDishesLayout.visibility = View.VISIBLE
+                nestedScrollView.visibility = View.GONE
+            }
+            addButton.setOnClickListener { addButtonClicked() }
+            showDishesToCookButton.setOnClickListener { checkDishesToCookButtonClicked() }
         }
-        viewBinding.addButton.setOnClickListener { addButtonClicked() }
         with(dialogViewBinding) {
             addDishButton.setOnClickListener { addDishToList() }
             cancelButton.setOnClickListener { dialog.dismiss() }
@@ -96,13 +77,13 @@ class DishesActivity : AppCompatActivity() {
 
     private fun setupRecycler() {
         val adapter = DishesRecyclerViewAdapter(list, true)
-        viewBinding.recyclerViewTwo.layoutManager =
+        viewBinding.allDishesRecyclerView.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        viewBinding.recyclerViewTwo.adapter = adapter
+        viewBinding.allDishesRecyclerView.adapter = adapter
         val adapterYouCanMake = DishesRecyclerViewAdapter(youCanMakeList, false)
-        viewBinding.recyclerViewOne.layoutManager =
+        viewBinding.dishesToCookRecyclerView.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        viewBinding.recyclerViewOne.adapter = adapterYouCanMake
+        viewBinding.dishesToCookRecyclerView.adapter = adapterYouCanMake
     }
 
     private fun addButtonClicked() {
@@ -118,11 +99,13 @@ class DishesActivity : AppCompatActivity() {
 
     private fun addDishToList() {
         val ingredientsString: String = dialogViewBinding.dishIngredientsEditText.text.toString()
-        val ingredientsList: List<String> = ingredientsString.split(", ")
+        val ingredientsList: List<String> = ingredientsString.split(",")
+        val finalIngredientsList: MutableList<String> = mutableListOf()
+        ingredientsList.forEach { finalIngredientsList.add(it.trim()) }
         dishesSQLiteHelper.addDishToDatabase(
             Dish(
                 dialogViewBinding.dishNameEditText.text.toString(),
-                ingredientsList
+                finalIngredientsList
             )
         )
         list = dishesSQLiteHelper.getDishesFromDatabase()
@@ -131,8 +114,44 @@ class DishesActivity : AppCompatActivity() {
             viewBinding.noDishesLayout.visibility = View.GONE
             viewBinding.nestedScrollView.visibility = View.VISIBLE
         }
-        viewBinding.recyclerViewTwo.adapter?.notifyItemInserted(list.size - 1)
+        viewBinding.allDishesRecyclerView.adapter?.notifyItemInserted(list.size - 1)
         dialog.dismiss()
+    }
+
+    private fun checkDishesToCookButtonClicked() {
+        with(viewBinding) {
+            val ing = myIngredientsEdittext.text.toString()
+            val ingredientsList: List<String> = ing.split(",")
+            val finalIngredientsList: MutableList<String> = mutableListOf()
+            ingredientsList.forEach { finalIngredientsList.add(it.trim().toLowerCase(Locale.ROOT)) }
+            youCanMakeList.clear()
+            list.forEach {
+                val ingredientsToCompare =
+                    it.ingredients.map { ingredient -> ingredient.toLowerCase(Locale.ROOT) }
+                if (finalIngredientsList.containsAll(ingredientsToCompare)) {
+                    youCanMakeList.add(it)
+                }
+            }
+            viewBinding.myIngredientsEdittext.clearFocus()
+            viewBinding.myIngredientsEdittext.hideSoftInput()
+            viewBinding.dishesToCookRecyclerView.adapter?.notifyDataSetChanged()
+            updateDishesYouCanCookCard()
+        }
+    }
+
+    private fun updateDishesYouCanCookCard() {
+        with(viewBinding) {
+            if (youCanMakeList.isEmpty()) {
+                noDishesToCookCard.visibility = View.VISIBLE
+                if (myIngredientsEdittext.text.toString() == "") {
+                    noDishesToCookTextview.text =
+                        resources.getString(R.string.list_the_ingredients)
+                } else noDishesToCookTextview.text =
+                    resources.getString(R.string.could_not_find_to_cook)
+            } else {
+                noDishesToCookCard.visibility = View.GONE
+            }
+        }
     }
 
     private fun View.hideSoftInput() {
