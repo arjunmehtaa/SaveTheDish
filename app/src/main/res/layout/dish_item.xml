@@ -21,21 +21,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:layout_toStartOf="@id/delete_button"
+            android:layout_toStartOf="@id/edit_button"
             android:gravity="start"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:inputType="textCapWords"
             tools:text="fried chicken" />
+
+        <ImageView
+            android:id="@+id/edit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/delete_button"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/edit_icon" />
 
         <ImageView
             android:id="@+id/delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/todo"
             android:src="@drawable/delete_icon" />
 
         <TextView
@@ -43,9 +53,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/dish_name"
-            android:layout_toStartOf="@id/delete_button"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
+            android:layout_toStartOf="@id/edit_button"
             android:textSize="14sp" />
 
     </RelativeLayout>

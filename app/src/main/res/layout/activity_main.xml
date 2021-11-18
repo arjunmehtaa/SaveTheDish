@@ -70,9 +70,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="16dp"
                         android:layout_marginBottom="16dp"
+                        android:imeOptions="actionDone"
                         android:hint="@string/ingredients_you_have"
                         android:importantForAutofill="no"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
                         android:textSize="20sp" />
 
                     <Button
@@ -83,8 +84,22 @@
                         android:layout_marginBottom="16dp"
                         android:background="@drawable/rounded_background"
                         android:backgroundTint="@drawable/button_selector"
-                        android:enabled="true"
+                        android:enabled="false"
                         android:text="@string/dishes_i_can_cook"
+                        android:textAllCaps="false"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/add_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/rounded_background"
+                        android:backgroundTint="@drawable/button_selector"
+                        android:enabled="true"
+                        android:text="@string/add_new_dish"
                         android:textAllCaps="false"
                         android:textColor="@android:color/white"
                         android:textSize="16sp" />
@@ -199,6 +214,7 @@
         <ImageView
             android:id="@+id/no_dish_image"
             android:layout_width="200dp"
+            android:contentDescription="@string/todo"
             android:layout_height="200dp"
             android:src="@drawable/food_icon" />
 
@@ -213,17 +229,6 @@
             android:textSize="16sp" />
 
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="@color/button_enabled_color"
-        android:src="@drawable/add_icon" />
 
 </RelativeLayout>
 

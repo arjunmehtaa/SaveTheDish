@@ -42,7 +42,6 @@ class DishesActivity : AppCompatActivity() {
 
     private fun setupViews() {
         setupDialog()
-        list = dishesSQLiteHelper.getDishesFromDatabase()
         setupRecycler()
         with(viewBinding) {
             if (list.isNotEmpty()) {
@@ -54,6 +53,12 @@ class DishesActivity : AppCompatActivity() {
             }
             addButton.setOnClickListener { addButtonClicked() }
             showDishesToCookButton.setOnClickListener { checkDishesToCookButtonClicked() }
+            myIngredientsEdittext.addTextChangedListener(
+                DishNameTextWatcher(
+                    showDishesToCookButton,
+                    myIngredientsEdittext
+                )
+            )
         }
         with(dialogViewBinding) {
             addDishButton.setOnClickListener { addDishToList() }
@@ -76,11 +81,16 @@ class DishesActivity : AppCompatActivity() {
     }
 
     private fun setupRecycler() {
-        val adapter = DishesRecyclerViewAdapter(list, true)
+        list = dishesSQLiteHelper.getDishesFromDatabase()
+        val adapter = DishesRecyclerViewAdapter(list, true, clickListener = {
+            setupRecycler()
+        })
         viewBinding.allDishesRecyclerView.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         viewBinding.allDishesRecyclerView.adapter = adapter
-        val adapterYouCanMake = DishesRecyclerViewAdapter(youCanMakeList, false)
+        val adapterYouCanMake = DishesRecyclerViewAdapter(youCanMakeList, false, clickListener = {
+            setupRecycler()
+        })
         viewBinding.dishesToCookRecyclerView.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         viewBinding.dishesToCookRecyclerView.adapter = adapterYouCanMake

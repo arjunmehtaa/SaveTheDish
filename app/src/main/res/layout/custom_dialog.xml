@@ -37,7 +37,7 @@
                 android:layout_marginBottom="16dp"
                 android:hint="@string/ingredients"
                 android:importantForAutofill="no"
-                android:inputType="text"
+                android:inputType="textMultiLine"
                 android:textSize="24sp" />
 
             <Button

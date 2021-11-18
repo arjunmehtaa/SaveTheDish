@@ -53,10 +53,18 @@ class DishesSQLiteHelper(private val context: Context, factory: SQLiteDatabase.C
         return list
     }
 
-    fun deleteDishFromDatabase(dish : Dish){
+    fun deleteDishFromDatabase(dish: Dish) {
         val db = this.writableDatabase
         db.delete(TABLE_NAME, "$DISH_NAME =?", arrayListOf<String>(dish.name).toTypedArray())
         db.close()
+    }
+
+    fun updateDishInDatabase(oldName: String, name: String, ingredients: String) {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(DISH_NAME, name)
+        contentValues.put(DISH_ING, ingredients)
+        db.update(TABLE_NAME, contentValues, "$DISH_NAME= ?", arrayOf(oldName))
     }
 
     companion object {

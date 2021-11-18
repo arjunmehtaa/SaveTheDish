@@ -17,4 +17,7 @@
     <string name="all_dishes">All dishes</string>
     <string name="dishes_i_can_cook">Show dishes I can cook</string>
     <string name="ingredients_you_have">What ingredients do you have?</string>
+    <string name="add_new_dish">Add new dish</string>
+    <string name="confirm_changes">Confirm Changes</string>
+    <string name="todo">TODO</string>
 </resources>
