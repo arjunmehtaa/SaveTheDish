@@ -8,7 +8,7 @@ SaveTheDish features a simple single-activity architecture with plans of impleme
 
 ## Database
 
-SQLite is used to store, read and edit dishes/recipes locally.
+An SQLite Database is used to store, read and edit dishes/recipes locally.
 
 
 ## User Interface
