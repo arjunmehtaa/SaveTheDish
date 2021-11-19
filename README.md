@@ -8,7 +8,7 @@ SaveTheDish is a clean and minimalist Android app that allows users to view reci
   <img src="images/3.jpg" width="33%" />
   <img src="images/4.jpg" width="33%" />
   <img src="images/5.jpg" width="33%" />
-  <img src="images/6.jng" width="33%" />
+  <img src="images/6.jpg" width="33%" />
 </p>
 
 ## Architecture
