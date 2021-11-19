@@ -4,11 +4,11 @@ SaveTheDish is a clean and minimalist Android app that allows users to view reci
 
 ## Architecture
 
-* SaveTheDish features a simple single-activity architecture with plans of implementing fragments in the future to handle increased complexity.
+SaveTheDish features a simple single-activity architecture with plans of implementing fragments in the future to handle increased complexity.
 
 ## Database
 
-* SQLite is used to store, read and edit dishes/recipes locally.
+SQLite is used to store, read and edit dishes/recipes locally.
 
 
 ## User Interface
