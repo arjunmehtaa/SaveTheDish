@@ -52,6 +52,7 @@ class DishesActivity : AppCompatActivity() {
                 nestedScrollView.visibility = View.GONE
             }
             addButton.setOnClickListener { addButtonClicked() }
+            addNoDishButton.setOnClickListener { addButtonClicked() }
             showDishesToCookButton.setOnClickListener { checkDishesToCookButtonClicked() }
             myIngredientsEdittext.addTextChangedListener(
                 DishNameTextWatcher(

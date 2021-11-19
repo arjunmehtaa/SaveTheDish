@@ -4,7 +4,7 @@
     <string name="name">Name</string>
     <string name="add_dish">Add Dish</string>
     <string name="cancel">Cancel</string>
-    <string name="empty_list_text">Too bad, we could not find any delicious dishes. \nClick the \'+\' button to get started!</string>
+    <string name="empty_list_text">Too bad, we could not find any delicious dishes. \nClick the Add Dish button to get started!</string>
     <string name="sql_command_create_table">create table %s (%s TEXT, %s TEXT)</string>
     <string name="sql_command_drop_table">drop table if exists %s</string>
     <string name="sql_command_select">select * from %s</string>
