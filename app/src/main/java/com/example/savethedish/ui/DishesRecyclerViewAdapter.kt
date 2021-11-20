@@ -41,7 +41,10 @@ class DishesRecyclerViewAdapter(
     inner class DishesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(dish: Dish) = with(itemView) {
             if (showExtraOptions) delete_button.visibility = View.VISIBLE
-            else delete_button.visibility = View.INVISIBLE
+            else {
+                edit_button.visibility = View.INVISIBLE
+                delete_button.visibility = View.INVISIBLE
+            }
             dish_name.text = dish.name
             val ingredientsString = getIngredientsString(dish)
             dish_ingredients.text = ingredientsString
