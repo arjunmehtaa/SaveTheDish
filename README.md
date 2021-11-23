@@ -11,6 +11,12 @@ SaveTheDish is a clean and minimalist Android app that allows users to view reci
   <img src="images/6.jpg" width="32%" />
 </p>
 
+## Google Play Store Link
+
+SaveTheDish is released on the Google Play Store. Download it by clicking the banner below!
+
+[![](link to image on GH)](https://play.google.com/store/apps/details?id=com.arjuj.savethedish)
+
 ## Architecture
 
 SaveTheDish features a simple single-activity architecture with plans of implementing fragments in the future to handle increased complexity.
