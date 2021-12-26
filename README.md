@@ -15,7 +15,7 @@ SaveTheDish is a clean and minimalist Android app that allows users to view reci
 
 SaveTheDish is released on the Google Play Store. Download it by clicking the banner below!
 
-[![](images/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.arjuj.pokefacts)
+[![](images/google-play-badge.png)](https://play.google.com/store/apps/details?id=com.arjuj.savethedish)
 
 ## Architecture
 
